@@ -1,0 +1,77 @@
+title Visit note SPA
+
+note over browser
+    User types in
+    the URL of the SPA
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa
+
+note over server
+    Server responds with
+    HTML of the
+    notes listing page
+end note
+
+note left of server
+    ContentType: text/html; charset=utf-8
+end note
+
+server->browser: "<!DOCTYPE html><html><head> ... "
+
+note over browser
+   Browser interprets the HTML
+   and starts requesting the
+   external resources referred to
+   in the page
+end note
+
+browser->server: HTTP GET main.css
+browser->server: HTTP GET spa.js
+
+note over server
+    Server responds with
+    the requested resources
+end note
+
+note left of server
+    ContentType: text/css; charset=utf-8
+end note
+
+server->browser: main.css ".container { padding: 10px; ..."
+
+note left of server
+    ContentType: application/javascript; charset=utf-8
+end note
+
+server->browser: spa.js "var notes = [] ..."
+
+
+note over browser
+   Browser executes
+   the JavaScript
+   received and that
+   causes it to make
+   another request to
+   the server to
+   fetch the note data
+end note
+
+browser->server: HTTP GET /data.json
+
+note over server
+    Server responds with
+    the requested resource
+end note
+
+note left of server
+    ContentType: application/json; charset=utf-8
+end note
+
+server->browser: data.json "[{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"} ..."
+
+note over browser
+    Browwser interprets JSON data
+    and builds the list of notes
+end note
+

@@ -1,0 +1,76 @@
+title Creating a new note
+
+note over browser
+    User fills in form and
+    clicks the submit button
+    sending the content
+    of the note over 
+    to the server
+end note
+
+note right of browser
+    HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note
+end note
+browser->server: form data "note=form data is sent with an HTTP POST"
+note over server
+    Server saves the data
+    sent by the user
+    to a new note
+    and redirects them
+    to the notes listing
+    endpoint
+end note
+
+server->browser: HTTP 302 "Location: /notes"
+
+note over browser
+    Browser sees the
+    redirect request
+    and immediately 
+    loads the "/notes"
+    page that causes
+    them to load the
+    page resources again
+end note
+
+browser->server: HTTP GET /notes
+browser->server: HTTP GET main.css
+browser->server: HTTP GET main.js
+
+note over server
+    Server responds with
+    the resources
+end note
+
+server->browser: HTTP 200 OK /notes
+server->browser: HTTP 200 OK main.css
+server->browser: HTTP 200 OK main.js
+
+note over browser
+    Browser executes
+    main.js and that
+    causes another request
+    to go out to the server
+    to fetch the note data
+end note
+
+browser->server: HTTP GET /data.json
+
+note over server
+    Server responds 
+    with the contents
+    of data.json
+end note
+
+note left of server
+    ContentType: text/json
+end note
+
+server->browser: [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"} ...
+
+note over browser
+    Browser interprets
+    the JSON data
+    and inserts a list item
+    for each note into the <ul>
+end note

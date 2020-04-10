@@ -1,0 +1,35 @@
+title Creating a new note in an SPA
+
+note over browser
+    User fills in form and
+    clicks the submit button
+    sending the content
+    of the note over 
+    to the server
+end note
+
+note right of browser
+    HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note_spa
+    ContentType: application/json
+end note
+browser->server: form data "{content: "single page app does not reload the page", date:..."
+note over server
+    Server saves the data
+    sent by the user
+    responds with a message
+    indicating success
+end note
+
+note left of server
+    ContentType: application/json; charset=utf-8
+end note
+
+server->browser: {"message":"note created"}
+
+note over browser
+    Meanwhile browser
+    has already
+    updated the list of
+    notes in its DOM
+    with the new entry
+end note
