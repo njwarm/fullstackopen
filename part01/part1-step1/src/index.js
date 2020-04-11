@@ -42,7 +42,7 @@ const Content = (props) => {
   const courseParts = props.course.parts
   const items = []
   for(const [index, value] of courseParts.entries()) {
-    items.push(<p key={index}>{value.name} {value.exercises}</p>)
+    items.push(<Part part={value} />)
   }
   return (
     <div>
@@ -61,6 +61,14 @@ const Total = (props) => {
 
   return (
     <p>Number of exercises {total}</p>
+  )
+}
+
+const Part = (props) => {
+  return (
+    <div>
+      <p>{props.part.name} {props.part.exercises}</p>
+    </div>
   )
 }
 
